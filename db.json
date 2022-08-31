@@ -1,0 +1,17 @@
+{
+  "QuestionBank": [
+    {
+      "Question": "With which does the power to extend or restrict the jurisdiction of the High Court rest?",
+      "Correct": "With the Parliament",
+      "AnswerText": [
+        {
+          "AnswerFirst": "With the Parliament ",
+          "AnswerSecond": " With the Legislative",
+          "AnswerThird": " With the Council of Minister",
+          "AnswerFour": "With the Rajya Sabha"
+        }
+      ],
+      "id": 1
+    }
+  ]
+}
