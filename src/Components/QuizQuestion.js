@@ -2,27 +2,39 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function QuizQuestion() {
+    const url = "http://localhost:3002/QuestionBank"
     const [user, setUser] = useState([]);
-    const [currentQuestion,setCurrentQuestion]=useState(0);
+    const [btnDataStore, setBtnDataStore] = useState([]);
+    const [currentQuestion, setCurrentQuestion] = useState(0);
     const [score, setScore] = useState(0);
     const [showScore, setShowScore] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    console.error(currentQuestion);
+    console.warn(user.Question);
 
-    const handleAnswer =(number)=>{
-        const nextQuestion = currentQuestion+1;
-        if(nextQuestion<user.length)
-        {
-            setScore(score+number);
+    const handleAnswer = () => {
+        const nextQuestion = currentQuestion + 1;
+        if (nextQuestion < user.length) {
+            setScore(score + 1);
             setCurrentQuestion(nextQuestion);
-        }else{
-          setShowScore(true);
+        } else {
+            setShowScore(true);
         }
-      }
+        axios.post(url, {
+            UserAnswer: btnDataStore.UserAnswer,
+            user,
+          });
+         
+    };
     
-
-
+    const inputhandler = (event) => {
+        setBtnDataStore(() => ({
+          ...btnDataStore,
+          [event.target.name]: event.target.value,
+        }));
+      };
+      console.log(btnDataStore,"hyyy")
+  
     const resetQuiz = () => {
         setScore(0);
         setShowScore(false);
@@ -34,7 +46,6 @@ function QuizQuestion() {
         try {
             const result = await axios.get("http://localhost:3001/QuestionBank");
 
-            console.log(result.data)
             setUser(result.data);
             setLoading(false);
         } catch (err) {
@@ -44,61 +55,87 @@ function QuizQuestion() {
     useEffect(() => {
         GetQuestion();
     }, []);
-   
+
 
     if (loading) {
         return <p>Data is loading...</p>;
-      }    
+    }
 
     return (
         <>
-        {
-            loading 
-            ? 
-            <>
-            <div>loading............</div>
-            </>
-            :
-            <>
-             {
-                showScore
+            {
+                loading
                     ?
                     <>
-                        <div> <h3>You have a {score} out of {user.length}</h3></div>
-                        <button type='submit' className="btn btn-primary" onClick={resetQuiz}>Play Again</button>
+                        <div>loading............</div>
                     </>
                     :
                     <>
-                        <div className='question----'>
-                            <div className='question-num'>
-                                <h3><span>Question :{currentQuestion+1} </span> Total Question :{user.length}</h3>
-                            </div>
-                            <div className='question-text'>
-                            
-                            </div>
-                            <div className='answer'>
-            
-                               <h2>{user[currentQuestion].Question}</h2><br />
-                               {
-                                user[currentQuestion].AnswerText.map((data,index)=>{
-                                return(
-                                    <>
-                                    <div class="d-grid gap-1 col-4 mx-auto mt-0">
-                                    <button className="btn btn-primary" type="button" 
-                                    key={index} onClick={() => handleAnswer()}>{data.Answer}</button><br/>
+                        {
+                            showScore
+                                ?
+                                <>
+                                    <div> <h3>You have a {score} out of {user.length}</h3></div>
+                                    <button type='submit' className="btn btn-primary" onClick={resetQuiz}>Play Again</button>
+                                </>
+                                :
+                                <>
+                                    <div className='question----'>
+                                        <div className='question-num'>
+                                            <h3><span>Question :{currentQuestion + 1} </span> Total Question :{user.length}</h3>
+                                        </div>
+                                        <div className='question-text'>
+
+                                        </div>
+                                        <div className='answer'>
+
+                                            <h4>{user[currentQuestion].Question}</h4><br />
+                                            {
+                                                user[currentQuestion].AnswerText.map((data, index) => {
+                                                    return (
+                                                        <>
+                                                        <div key={index} onClick={() => handleAnswer()} className="container text-start fs-5" style={{width:"400px"}} >
+                                                            <div className="form-check">
+                                                                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                                                                <input className="form-check-input mx-3" type="radio" name="AnswerFirst" 
+                                                                id="flexRadioDefault1"  onChange={(event) => { inputhandler(event); }} value={data.AnswerFirst}
+                                                                 />
+                                                                {data.AnswerFirst}
+                                                                </label>
+                                                            </div>
+                                                            <div className="form-check">
+                                                                <label className="form-check-label " htmlFor="flexRadioDefault2">
+                                                                <input className="form-check-input mx-3" type="radio" name="AnswerSecond" 
+                                                                id="flexRadioDefault2" />
+                                                                {data.AnswerSecond}
+                                                                </label>
+                                                            </div>
+                                                            <div className="form-check">   
+                                                                <label className="form-check-label " htmlFor="flexRadioDefault3">
+                                                                <input className="form-check-input mx-3" type="radio" name="AnswerThird" 
+                                                                id="flexRadioDefault3" />
+                                                                {data.AnswerThird}
+                                                                </label>
+                                                            </div>
+                                                            <div className="form-check">
+                                                                <label className="form-check-label" htmlFor="flexRadioDefault4">
+                                                                <input className="form-check-input mx-3" type="radio" name="AnswerFour" 
+                                                                id="flexRadioDefault4" />
+                                                                {data.AnswerFour}
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                </>
+                                              );
+                                            })
+                                          }
                                     </div>
-                                    </>
-                                );
-                                })
-                               }                   
-                                   
-                            </div>
-                        </div>
+                              </div>
+                          </>
+                        }
                     </>
             }
-            </>
-        }
-           
+
         </>
     );
 }
