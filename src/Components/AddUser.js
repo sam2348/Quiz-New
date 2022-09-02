@@ -7,7 +7,7 @@ function AddUser() {
   // const [value,setValue]=useState(Boolean)
   const [storeData,setStoreData]=useState([])
   const [cheakBox,setCheakBox]=useState(false);
-  const [addAns,setAddAns]=useState({Answer:" ",valueData:cheakBox},);
+  const [addAns,setAddAns]=useState({Answer:" ",valueData:storeData},);
   const [questiondata, setQuestionData] = useState({ Question:'',AnswerText:[]});
   const [data,setData]=useState("")
 
