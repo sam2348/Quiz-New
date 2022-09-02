@@ -1,27 +1,26 @@
-import React, { useState,useRef } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 const url = "http://localhost:3001/QuestionBank"
 
 
 function AddUser() {
-  const ref=useRef();
-  const [value,setValue]=useState()
+  // const [value,setValue]=useState(Boolean)
   const [storeData,setStoreData]=useState([])
   const [cheakBox,setCheakBox]=useState(false);
-  const [addAns,setAddAns]=useState({Answer:"",valuec:value});
+  const [addAns,setAddAns]=useState({Answer:" ",valueData:cheakBox},);
   const [questiondata, setQuestionData] = useState({ Question:'',AnswerText:[]});
   const [data,setData]=useState("")
 
+  console.log(addAns,"-------",cheakBox,"=============")
   const onClick = (e) => {
     e.preventDefault();
     axios.post(url, {
       Question: questiondata.Question,
-      Correct: questiondata.Correct,
-      AnswerText: [addAns],
+      AnswerText:storeData,
     });
     alert("yes")
   };
- 
+
   const iputhandler = (event) => {
     setQuestionData((prestate) => ({
       ...prestate,
@@ -37,18 +36,14 @@ function AddUser() {
     setStoreData([...storeData, addAns]);
   // setAddAns('')
   };
-  console.log(value,"adddata ===================")
+
   const cheakBoxHandler = ()=>{
-    if (cheakBox === false) {
-      setCheakBox(true)
-      setData(true) 
-      setValue(cheakBox)
-    } else {
-      setCheakBox(false)
-      setData(false) 
+    if(cheakBox === cheakBox){
+      setCheakBox(true);
+    }else{
+      setCheakBox(false);
     }
   }
-  console.log(cheakBox)
   return (
     <>
       <div className="Addmovie">
@@ -60,7 +55,6 @@ function AddUser() {
                 type="text"
                 className="form-control"
                 name="Question"
-                ref={ref}
                 placeholder="Enter Question"
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2"
@@ -97,7 +91,7 @@ function AddUser() {
                 id="basic-url"
                 aria-describedby="basic-addon3"
                 placeholder="Enter Second Answer"
-                name="AnswerSecond"
+                name="Answer"
                 onChange={(event) => {
                   inputhandler(event);
                 }}
@@ -116,7 +110,7 @@ function AddUser() {
                 id="basic-url"
                 aria-describedby="basic-addon3"
                 placeholder="Enter Third Answer"
-                name="AnswerThird"
+                name="Answer"
                 onChange={(event) => {
                   inputhandler(event);
                 }}
@@ -135,7 +129,7 @@ function AddUser() {
                 id="basic-url"
                 aria-describedby="basic-addon3"
                 placeholder="Enter Four Answer"
-                name="AnswerFour"
+                name="Answer"
                 onChange={(event) => {
                   inputhandler(event);
                 }}
