@@ -4,13 +4,14 @@ import axios from 'axios';
 function QuizQuestion() {
     const url = "http://localhost:3002/QuestionBank"
     const [user, setUser] = useState([]);
+    const [cheak, setCheak] = useState();
     const [btnDataStore, setBtnDataStore] = useState([]);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [score, setScore] = useState(0);
     const [showScore, setShowScore] = useState(false);
     const [loading, setLoading] = useState(true);
 
-
+    console.log(user,"****************")
     const handleAnswer = () => {
         const nextQuestion = currentQuestion + 1;
         if (nextQuestion < user.length) {
@@ -23,11 +24,19 @@ function QuizQuestion() {
             UserAnswer: btnDataStore.UserAnswer,
             user,
           });
-          setBtnDataStore([])
+          setBtnDataStore([])   
     };
+    
+    const handleChange =(event)=>{
 
-    
-    
+        if(event.target.checked ){
+            setCheak(true)
+          }else{
+            setCheak(false)
+          }
+        
+    }
+
     const inputhandler = (event) => {
         setBtnDataStore(() => ({
           ...btnDataStore,
@@ -56,6 +65,7 @@ function QuizQuestion() {
         GetQuestion();
     }, []);
 
+    
 
     if (loading) {
         return <p>Data is loading...</p>;
@@ -94,43 +104,24 @@ function QuizQuestion() {
                                                 user[currentQuestion].AnswerText.map((data, index) => {
                                                     return (
                                                         <>
-                                                        <div key={index}  className="container text-start fs-5" style={{width:"400px"}} >
+                                                        <div key={index.id}  className="container text-start fs-5" style={{width:"400px"}} >
                                                             <div className="form-check">
                                                                 <label className="form-check-label" htmlFor="flexRadioDefault1">
                                                                 <input className="form-check-input mx-3" type="radio" name="Answer" 
                                                                 id="flexRadioDefault"  
-                                                                // onChange={(event) => { inputhandler(event) }} value={data.AnswerFirst}
+                                                                checked={cheak}
+                                                                onChange={handleChange}
                                                                  />
-                                                                {data.AnswerFirst}
-                                                                </label>
-                                                            </div>
-                                                            <div className="form-check">
-                                                                <label className="form-check-label " htmlFor="flexRadioDefault2">
-                                                                <input className="form-check-input mx-3" type="radio" name="Answer" 
-                                                                id="flexRadioDefault" />
-                                                                {data.AnswerSecond}
-                                                                </label>
-                                                            </div>
-                                                            <div className="form-check">   
-                                                                <label className="form-check-label " htmlFor="flexRadioDefault3">
-                                                                <input className="form-check-input mx-3" type="radio" name="Answer" 
-                                                                id="flexRadioDefault" />
-                                                                {data.AnswerThird}
-                                                                </label>
-                                                            </div>
-                                                            <div className="form-check">
-                                                                <label className="form-check-label" htmlFor="flexRadioDefault4">
-                                                                <input className="form-check-input mx-3" type="radio" name="Answer" 
-                                                                id="flexRadioDefault" />
-                                                                {data.AnswerFour}
+                                                                {data.Answer}
                                                                 </label>
                                                             </div>
                                                         </div>
-                                                        <div><button type="button" className='btn btn-primary mt-3 me-5' onClick={() => handleAnswer()}>Next</button></div>
                                                 </>
+                                                
                                               );
                                             })
                                           }
+                                          <div><button type="button" className='btn btn-primary mt-3 me-5' onClick={() => handleAnswer()}>Next</button></div>
                                     </div>
                               </div>
                           </>

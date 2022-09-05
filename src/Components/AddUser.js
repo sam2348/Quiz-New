@@ -1,19 +1,24 @@
+
 import React, { useState } from "react";
 import axios from "axios";
 const url = "http://localhost:3001/QuestionBank"
 
+const temp_arr = [
+                  {Answer:'', correct:false},
+                  {Answer:'', correct:false},
+                  {Answer:'', correct:false},
+                  {Answer:'', correct:false} 
+              ];
 
 function AddUser() {
-  // const [holdData,setHoldData]=useState([])
-  const [addAns,setAddAns]=useState({Answer:" ",correct:false});
+  // const [addAns,setAddAns]=useState({});
   const [questiondata, setQuestionData] = useState({ Question:'',AnswerText:''});
 
-  console.log(addAns,"==============")
   const onClick = (e) => {
     e.preventDefault();
     axios.post(url, {
       Question: questiondata.Question,
-      AnswerText:addAns,
+      AnswerText:temp_arr,
     });
     alert("yes")
     
@@ -26,23 +31,16 @@ function AddUser() {
     }));
   };
 
-  const inputhandler = (event) => {
-    setAddAns((prestate) => ({
-      ...prestate,
-      [event.target.name]: event.target.value,
-    }));
+  const inputhandler = (event, idx) => {
+    // setAddAns(event.target.value);
+    temp_arr[idx]['Answer'] = event.target.value;
   };
 
-  const cheakBoxHandler = (event)=>{
+  const cheakBoxHandler = (event, idx)=>{
     if(event.target.checked ){
-      setAddAns((prestate) => ({
-        ...prestate,
-        correct:true
-      }));
+      temp_arr[idx]['correct'] = true;
     }else{
-      setAddAns(() => ({
-        correct:false
-      }));
+      temp_arr[idx]['correct'] = false;
     }
    }
 
@@ -70,59 +68,68 @@ function AddUser() {
             <div className="input-group mb-3">
               <input
                 type="text"    
+                
                 className="form-control"
                 id="basic-url"
                 aria-describedby="basic-addon3"
                 placeholder=" Enter First Answer"
                 name="Answer"
                 onChange={(event) => {
-                  inputhandler(event);
+                  inputhandler(event, 0);
                 }}
                 required
               />
               <div className="form-check ms-3 mt-1 fs-5">
              <input className="form-check-input"  type="checkbox" name="correct" 
-             id="flexCheckIndeterminate" onChange={cheakBoxHandler} />
+             id="flexCheckIndeterminate"  onChange={(event) => {
+              cheakBoxHandler(event, 0);
+            }} />
              <label className="form-check-label" htmlFor="flexCheckIndeterminate" >
              </label>
              </div>
             </div>
             <div className="input-group mb-3">
               <input
-                type="text"    
+                type="text"
+                    
                 className="form-control"
                 id="basic-url"
                 aria-describedby="basic-addon3"
                 placeholder="Enter Second Answer"
                 name="Answer"
                 onChange={(event) => {
-                  inputhandler(event);
+                  inputhandler(event, 1);
                 }}
                 required
               />
               <div className="form-check ms-3 mt-1 fs-5">
              <input className="form-check-input"  type="checkbox" name="correct" id="flexCheckIndeterminate" 
-             onChange={cheakBoxHandler} />
+             onChange={(event) => {
+              cheakBoxHandler(event, 1);
+            }} />
              <label className="form-check-label" htmlFor="flexCheckIndeterminate">
              </label>
              </div>
             </div>
             <div className="input-group mb-3">
               <input
-                type="text"    
+                type="text"  
+                  
                 className="form-control"
                 id="basic-url"
                 aria-describedby="basic-addon3"
                 placeholder="Enter Third Answer"
                 name="Answer"
                 onChange={(event) => {
-                  inputhandler(event);
+                  inputhandler(event, 2);
                 }}
                 required
               />
               <div className="form-check ms-3 mt-1 fs-5">
              <input className="form-check-input"  type="checkbox" name="correct" 
-             id="flexCheckIndeterminate" onChange={cheakBoxHandler} />
+             id="flexCheckIndeterminate" onChange={(event) => {
+              cheakBoxHandler(event, 3);
+            }} />
              <label className="form-check-label" htmlFor="flexCheckIndeterminate">
              </label>
              </div>
@@ -130,13 +137,14 @@ function AddUser() {
             <div className="input-group mb-3">
               <input
                 type="text"    
+                
                 className="form-control"
                 id="basic-url"
                 aria-describedby="basic-addon3"
                 placeholder="Enter Four Answer"
                 name="Answer"
                 onChange={(event) => {
-                  inputhandler(event);
+                  inputhandler(event, 3);
                 }}
                 required
               />
