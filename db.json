@@ -1,70 +1,96 @@
 {
   "QuestionBank": [
     {
-      "Question": "With which does the power to extend or restrict the jurisdiction of the High Court rest?",
-      "Correct": "With the Parliament",
-      "AnswerText": [
-        {
-          "AnswerFirst": "With the Parliament ",
-          "AnswerSecond": " With the Legislative",
-          "AnswerThird": " With the Council of Minister",
-          "AnswerFour": "With the Rajya Sabha"
-        }
-      ],
-      "id": 1
+      "Question": "",
+      "AnswerText": [],
+      "id": 6
     },
     {
       "Question": "how is this ?",
-      "Correct": "yes",
-      "AnswerText": [
-        {
-          "Answer": "",
-          "AnswerFirst": "yes",
-          "AnswerSecond": "no",
-          "AnswerThird": "yes or no ",
-          "AnswerFour": "both"
-        }
-      ],
-      "id": 2
+      "AnswerText": {
+        "Answer": "kkjkhkhj",
+        "correct": ""
+      },
+      "id": 7
     },
     {
-      "Question": "function foo1() {   return {       bar: \"hello\"   }; } function foo2() {   return   {       bar: \"hello\"   }; } white_check_mark eyes raised_hands",
-      "Correct": "",
+      "Question": "how is this ?",
       "AnswerText": [
         {
-          "AnswerFirst": "card",
-          "AnswerSecond": "car",
-          "AnswerThird": "yes or no ",
-          "AnswerFour": "shoes"
+          "Answer": "sandeep",
+          "correct": false
         }
       ],
-      "id": 3
+      "id": 8
     },
     {
-      "Question": "how is you in",
-      "Correct": "",
+      "Question": "how is you in?",
       "AnswerText": [
         {
-          "AnswerFirst": "function foo1()\n{\n  return {\n      bar: \"hello\"\n  };\n}\nfunction foo2()\n{\n  return\n  {\n      bar: \"hello\"\n  };\n}\nwhite_check_mark\neyes\nraised_hands\n\n\n\n\n\n\n\n\n",
-          "AnswerSecond": "sfhdf",
-          "AnswerThird": "hdsfg",
-          "AnswerFour": "hsdfdgsfh"
+          "Answer": " ",
+          "correct": false
+        },
+        {
+          "Answer": "sandeep",
+          "correct": false
+        },
+        {
+          "Answer": "fdgdfgdfgdfg",
+          "correct": false
+        },
+        {
+          "Answer": "fdgdfgdfgdfg",
+          "correct": false
         }
       ],
-      "id": 4
+      "id": 9
     },
     {
-      "Question": "how is you in",
-      "Correct": "",
+      "Question": "dfsfsdfdf",
       "AnswerText": [
         {
-          "AnswerFirst": "function foo1()\n{\n  return {\n      bar: \"hello\"\n  };\n}\nfunction foo2()\n{\n  return\n  {\n      bar: \"hello\"\n  };\n}\nwhite_check_mark\neyes\nraised_hands\n\n\n\n\n\n\n\n\n",
-          "AnswerSecond": "sfhdf",
-          "AnswerThird": "hdsfg",
-          "AnswerFour": "hsdfdgsfh"
+          "Answer": " ",
+          "correct": false
+        },
+        {
+          "Answer": " ",
+          "correct": false
+        },
+        {
+          "Answer": " ",
+          "correct": false
+        },
+        {
+          "Answer": " ",
+          "correct": false
+        },
+        {
+          "Answer": " ",
+          "correct": false
+        },
+        {
+          "Answer": " ",
+          "correct": false
+        },
+        {
+          "Answer": " ",
+          "correct": false
+        },
+        {
+          "Answer": " ",
+          "correct": false
+        },
+        {
+          "Answer": " ",
+          "correct": false
         }
       ],
-      "id": 5
+      "id": 10
+    },
+    {
+      "Question": "dfsfsdfsdfsfsfsdf",
+      "AnswerText": [],
+      "id": 11
     }
   ]
 }

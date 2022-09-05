@@ -4,21 +4,19 @@ const url = "http://localhost:3001/QuestionBank"
 
 
 function AddUser() {
-  // const [value,setValue]=useState(Boolean)
-  const [storeData,setStoreData]=useState([])
-  const [cheakBox,setCheakBox]=useState(false);
-  const [addAns,setAddAns]=useState({Answer:" ",valueData:storeData},);
-  const [questiondata, setQuestionData] = useState({ Question:'',AnswerText:[]});
-  const [data,setData]=useState("")
+  // const [holdData,setHoldData]=useState([])
+  const [addAns,setAddAns]=useState({Answer:" ",correct:false});
+  const [questiondata, setQuestionData] = useState({ Question:'',AnswerText:''});
 
-  console.log(addAns,"-------",cheakBox,"=============")
+  console.log(addAns,"==============")
   const onClick = (e) => {
     e.preventDefault();
     axios.post(url, {
       Question: questiondata.Question,
-      AnswerText:storeData,
+      AnswerText:addAns,
     });
     alert("yes")
+    
   };
 
   const iputhandler = (event) => {
@@ -33,17 +31,21 @@ function AddUser() {
       ...prestate,
       [event.target.name]: event.target.value,
     }));
-    setStoreData([...storeData, addAns]);
-  // setAddAns('')
   };
 
-  const cheakBoxHandler = ()=>{
-    if(cheakBox === cheakBox){
-      setCheakBox(true);
+  const cheakBoxHandler = (event)=>{
+    if(event.target.checked ){
+      setAddAns((prestate) => ({
+        ...prestate,
+        correct:true
+      }));
     }else{
-      setCheakBox(false);
+      setAddAns(() => ({
+        correct:false
+      }));
     }
-  }
+   }
+
   return (
     <>
       <div className="Addmovie">
@@ -79,8 +81,9 @@ function AddUser() {
                 required
               />
               <div className="form-check ms-3 mt-1 fs-5">
-             <input className="form-check-input" disabled={data} type="checkbox" value={cheakBox} id="flexCheckIndeterminate" onChange={() => cheakBoxHandler()} />
-             <label className="form-check-label" htmlFor="flexCheckIndeterminate">
+             <input className="form-check-input"  type="checkbox" name="correct" 
+             id="flexCheckIndeterminate" onChange={cheakBoxHandler} />
+             <label className="form-check-label" htmlFor="flexCheckIndeterminate" >
              </label>
              </div>
             </div>
@@ -98,7 +101,8 @@ function AddUser() {
                 required
               />
               <div className="form-check ms-3 mt-1 fs-5">
-             <input className="form-check-input" disabled={data} type="checkbox" value={cheakBox} id="flexCheckIndeterminate" onChange={() => cheakBoxHandler()} />
+             <input className="form-check-input"  type="checkbox" name="correct" id="flexCheckIndeterminate" 
+             onChange={cheakBoxHandler} />
              <label className="form-check-label" htmlFor="flexCheckIndeterminate">
              </label>
              </div>
@@ -117,7 +121,8 @@ function AddUser() {
                 required
               />
               <div className="form-check ms-3 mt-1 fs-5">
-             <input className="form-check-input" disabled={data} type="checkbox" value={cheakBox} id="flexCheckIndeterminate" onChange={() => cheakBoxHandler()} />
+             <input className="form-check-input"  type="checkbox" name="correct" 
+             id="flexCheckIndeterminate" onChange={cheakBoxHandler} />
              <label className="form-check-label" htmlFor="flexCheckIndeterminate">
              </label>
              </div>
@@ -136,7 +141,8 @@ function AddUser() {
                 required
               />
               <div className="form-check ms-3 mt-1 fs-5">
-             <input className="form-check-input" disabled={data} type="checkbox" value={cheakBox} id="flexCheckIndeterminate" onChange={() => cheakBoxHandler()} />
+             <input className="form-check-input"  type="checkbox" name="correct" id="flexCheckIndeterminate"
+             onChange={cheakBoxHandler} />
              <label className="form-check-label" htmlFor="flexCheckIndeterminate">
              </label>
              </div>

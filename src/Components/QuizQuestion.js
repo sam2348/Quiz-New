@@ -10,7 +10,6 @@ function QuizQuestion() {
     const [showScore, setShowScore] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    console.warn(user.Question);
 
     const handleAnswer = () => {
         const nextQuestion = currentQuestion + 1;
@@ -35,7 +34,6 @@ function QuizQuestion() {
           [event.target.name]: event.target.value,
         }));
       };
-      console.log(btnDataStore,"hyyy")
   
     const resetQuiz = () => {
         setScore(0);
