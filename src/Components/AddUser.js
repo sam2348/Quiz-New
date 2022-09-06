@@ -1,6 +1,10 @@
 
 import React, { useState } from "react";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const url = "http://localhost:3001/QuestionBank"
 
 const temp_arr = [
@@ -11,17 +15,15 @@ const temp_arr = [
               ];
 
 function AddUser() {
-  // const [addAns,setAddAns]=useState({});
   const [questiondata, setQuestionData] = useState({ Question:'',AnswerText:''});
-
   const onClick = (e) => {
     e.preventDefault();
     axios.post(url, {
       Question: questiondata.Question,
       AnswerText:temp_arr,
     });
-    alert("yes")
-    
+    toast.success('Question added sucessfully')
+     e.target.reset();
   };
 
   const iputhandler = (event) => {
@@ -32,7 +34,6 @@ function AddUser() {
   };
 
   const inputhandler = (event, idx) => {
-    // setAddAns(event.target.value);
     temp_arr[idx]['Answer'] = event.target.value;
   };
 
@@ -46,10 +47,11 @@ function AddUser() {
 
   return (
     <>
+      <div><NavLink className="btn btn-outline-success ms-5 mt-5" type="button" to="/" >HomePage</NavLink></div>
       <div className="Addmovie">
-        <div className="container py-5 mt-5" id="cont">
+        <div className="container py-5" id="cont">
           <h1 className="text-center mb-3" Style="font-family: 'DynaPuff', cursive; Color:Black;">Add Question</h1>
-          <form className="needs-validation">
+          <form onSubmit={onClick} >
             <div className="input-group mb-3">
               <input
                 type="text"
@@ -68,7 +70,6 @@ function AddUser() {
             <div className="input-group mb-3">
               <input
                 type="text"    
-                
                 className="form-control"
                 id="basic-url"
                 aria-describedby="basic-addon3"
@@ -157,14 +158,14 @@ function AddUser() {
             </div>
             <div class="d-grid gap-2 col-6 mx-auto mt-3">
               <button
-                class="btn btn-success" type="button"
-                onClick={onClick}
+                className="btn btn-success" type="submit"
                 >
                 Button
               </button>
             </div>
           </form>
         </div>
+        <ToastContainer/>
       </div>
     </>
   );

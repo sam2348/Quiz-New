@@ -1,18 +1,20 @@
-import React,{useState} from 'react';
+import React from 'react';
 import './App.css';
 import AddUser from './Components/AddUser';
 import QuizQuestion from "./Components/QuizQuestion";
-import Home from './Components/try/Home';
+import Navbar from './Components/Navbar';
+import { Route,Routes } from 'react-router-dom';
+
 
 function App() {
-  // const [gameState,setGameState]=useState("home")
   return (
-    <div className="App">
-      <h1>Quiz App</h1> 
-     < QuizQuestion />
-      < AddUser /> 
-      < Home />
-    </div>
+    <>
+    <Navbar />
+      <Routes>
+         <Route path="/" element={<QuizQuestion />} />
+         <Route path="/addquestion" element={<AddUser />} />
+      </Routes>
+    </>
   );
 }
 
